@@ -52,11 +52,29 @@ if(isset($_POST['register']))
 <body>
 	<div id="heading" style="position: fixed;">
 			<p id="name">Aid to Fund</p>
-			<a href="index.html">Home</a>
+			<a href="index.php">Home</a>
             <a>About</a>
             <a>Contect</a>
-			<img src="1BBXQAfdUMTL6SQt66eSLYS7.jpg" width="50px" height="50px" id="im">
-			<p id="user-name">Abhishek Kumar Singh</p>
+            <?php 
+            	if(isset($_COOKIE['Email']))
+            	{
+            		$row = getdata($_COOKIE['Email']);
+            	}
+            ?>
+           	<?php 
+            	if(isset($_COOKIE['Email']))
+             		echo '<img src = "data:image/jpeg;base64,'.base64_encode($row['image']).'" width = "50" height="50">';
+             	else	
+             	  echo '<img src ="user.jpg" width = "50" height="50">';
+			?>
+			<p id="user-name">
+				<?php 
+					if(isset($_COOKIE['Email']))
+						echo $row['UserName'];
+					else 
+					   	echo "Username";	
+				?>	
+			</p>
 	</div>
 	<div id="container">
 		<div class="sub-container">
